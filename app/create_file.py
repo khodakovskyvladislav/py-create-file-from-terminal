@@ -47,7 +47,7 @@ def create_file() -> None:
     file_has_content = (
         os.path.exists(file_path)
         and os.path.getsize(file_path) > 0
-    )   
+    )
 
     # 6. Opening the file for appending
     with open(file_path, "a", encoding="utf-8") as file:
