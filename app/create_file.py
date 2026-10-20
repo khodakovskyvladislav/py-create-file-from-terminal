@@ -11,7 +11,7 @@ def create_file() -> None:
     filename = None
     mode = None
 
-    # 1. Розбираємо аргументи термінала
+    # 1. Analyzing terminal arguments
     for argument in arguments:
         if argument == "-d":
             mode = "directory"
@@ -27,21 +27,21 @@ def create_file() -> None:
                 raise ValueError("Only one filename is allowed")
             filename = argument
 
-    # 2. Створюємо директорії, якщо вони вказані
+    # 2. Create directories if they are specified
     if directories:
         directory_path = os.path.join(*directories)
         os.makedirs(directory_path, exist_ok=True)
     else:
         directory_path = ""
 
-    # 3. Якщо назви файлу немає, завершуємо роботу
+    # 3. If the filename is missing, terminate the program
     if filename is None:
         return
 
-    # 4. Формуємо повний шлях до файлу
+    # 4. make the full path to the file
     file_path = os.path.join(directory_path, filename)
 
-    # 5. Отримуємо поточну дату й час
+    # 5. get curent date and time
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     file_has_content = (
@@ -49,7 +49,7 @@ def create_file() -> None:
         and os.path.getsize(file_path) > 0
     )   
 
-    # 6. Відкриваємо файл для дописування
+    # 6. Opening the file for appending
     with open(file_path, "a", encoding="utf-8") as file:
         if file_has_content:
             file.write("\n")
@@ -58,7 +58,7 @@ def create_file() -> None:
 
         line_number = 1
 
-        # 7. Читаємо текст, поки не введуть stop
+        # 7. We read the text until 'stop' is entered.
         while True:
             content = input("Enter content line: ")
 
